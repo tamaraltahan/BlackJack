@@ -6,11 +6,11 @@ public class Card {
      * @param value from 1-13
      * @param suit  value from 1-4 (Clubs, Diamonds, Hearts, Spades)
      */
-    Card(short value, short suit) {
+    Card(short value, Suit suit) {
         if (value <= 0 || value > 13)
             throw new IllegalArgumentException("Card index out of bounds");
         this.value = value;
-        this.suit = new Suit(suit);
+        this.suit = suit;
     }
 
     @Override
