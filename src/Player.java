@@ -66,6 +66,12 @@ public class Player {
                 aces++;
             }
         }
+        /*
+        Not sure what the optimal strategy for processing aces.
+        current algorithm:
+        If you have one ace, then it will be +1 or +11 depending on which brings you closer (but not over) 21
+        however, if you have 2 aces, it adds 12 (11 + 1) if it doesn't bring you over 21, and adds two otherwise.
+         */
         if(aces == 1){
             int withEleven = total + 11;
             int withOne = total + 1;
@@ -77,6 +83,14 @@ public class Player {
             }
             else{
                 total = withOne;
+            }
+        }
+        else{
+            if(total + 12 <= 21){
+                total += 12;
+            }
+            else{
+                total += 2;
             }
         }
         return total;

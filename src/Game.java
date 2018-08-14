@@ -30,16 +30,20 @@ public class Game {
      */
     private void initialize(){
         System.out.println("How much you wanna start with, b?");
-        double mun = in.nextDouble();
-        if(mun < 1){
-            do{
-                System.out.println("Minimum buy in is $1");
-                mun = in.nextDouble();
-            }while(mun < 1);
+        try {
+            double mun = in.nextDouble();
+            if (mun < 1) {
+                do {
+                    System.out.println("Minimum buy in is $1");
+                    mun = in.nextDouble();
+                } while (mun < 1);
+            }
+            player = new Player(mun);
+            house = new Player(Double.MAX_VALUE);
+            setUp();
+        }catch (Exception E){
+            System.out.println("Bruh, I tried being nice. Now you can't play. I mean just look at what you did...\n" + E);
         }
-        player = new Player(mun);
-        house = new Player(Double.MAX_VALUE);
-        setUp();
     }
 
     /**
@@ -64,6 +68,7 @@ public class Game {
 
         if (house.getDeckValue() == 21) {
             System.out.println("House BlackJack!");
+            beginAgain();
         }
         hit(player);
         if (player.getDeckValue() == 21) {
@@ -74,8 +79,11 @@ public class Game {
         play();
     }
 
+    /**
+     * prompts to begin again if player has at least $1
+     */
     private void beginAgain(){
-        if (player.getTotalMoney() > 1) {
+        if (player.getTotalMoney() > 0) {
             System.out.println("Would you like to continue?");
             char choice = in.next().charAt(0);
             if (choice == 'y') {
@@ -150,7 +158,7 @@ public class Game {
     private void gameOver(){
         System.out.println("You started with: " + player.getStartingCash() + "\nYou finished with: "
         + player.getTotalMoney());
-        System.out.println("Thanks for playing!");
+        System.out.println("Thanks for playing :^)");
         in.close();
         System.exit(0);
     }
