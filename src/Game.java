@@ -15,6 +15,10 @@ public class Game {
         player.setBet(player.getBet() * 2);
     }
 
+    public Game(){
+        initialize();
+    }
+
     /**
      * Prints both house and player's cards
      */
@@ -50,7 +54,7 @@ public class Game {
      * accepts bets and eals out two cards
      * also checks for dealt blackjacks
      */
-    public void setUp() {
+    private void setUp() {
         System.out.println("Place your bet!");
         int bet;
         bet = in.nextInt();
@@ -107,7 +111,7 @@ public class Game {
     /**
      * Assumes that both the player and house have 2 cards, and the player has made his bet.
      */
-    public void play() {
+    private void play() {
         boolean bust = false;
         System.out.println("House cards: ");
         house.showCard();
